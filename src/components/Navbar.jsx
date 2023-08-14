@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { login, logout, onUserStateChange } from '../api/firebase';
 
 export default function Navbar() {
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    onUserStateChange((user) => {
+      setUser(user);
+    });
+  }, []);
+
+  const handleLogin = () => {
+    login().then(setUser);
+  };
+  const handleLogout = () => {
+    logout().then(setUser);
+  };
   return (
     <header className='flex justify-between border-b border-gray-300 p-4'>
       <Link
@@ -19,7 +34,8 @@ export default function Navbar() {
         <Link to='/products'>Products</Link>
         <Link to='/carts'>My Cart</Link>
         <Link to='/products/new'>Admin</Link>
-        <button>Login</button>
+        {!user && <button onClick={handleLogin}>Login</button>}
+        {user && <button onClick={handleLogout}>Logout</button>}
       </nav>
     </header>
   );
