@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { login, logout, onUserStateChange } from '../api/firebase';
 import User from './User';
+import Button from './ui/Button';
 
 export default function Navbar() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    onUserStateChange(setUser);
+    onUserStateChange((user) => {
+      setUser(user);
+    });
   }, []);
 
   return (
@@ -26,10 +29,20 @@ export default function Navbar() {
       <nav className='flex items-center gap-4 font-semibold'>
         <Link to='/products'>Products</Link>
         <Link to='/carts'>My Cart</Link>
-        <Link to='/products/new'>Admin</Link>
+        {user && user.isAdmin && <Link to='/products/new'>Admin</Link>}
         {user && <User user={user} />}
-        {!user && <button onClick={login}>Login</button>}
-        {user && <button onClick={logout}>Logout</button>}
+        {!user && (
+          <Button
+            text={'Login'}
+            onClick={login}
+          />
+        )}
+        {user && (
+          <Button
+            text={'Logout'}
+            onClick={logout}
+          />
+        )}
       </nav>
     </header>
   );
