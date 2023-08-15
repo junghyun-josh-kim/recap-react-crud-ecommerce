@@ -35,7 +35,7 @@ export default function NewProduct() {
 
   return (
     <section className='w-full text-center m-4'>
-      <h2 className='text-2xl font-bold my-4'>Add New Product</h2>
+      <h2 className='text-3xl font-bold my-4'>New Product</h2>
       {success && <p className='text-l font-bold my-2'>{success}</p>}
       {file && (
         <img
@@ -98,6 +98,7 @@ export default function NewProduct() {
         <Button
           text={isUploading ? 'Uploading' : 'Add Product'}
           disabled={isUploading}
+          style={'text-xl font-bold'}
         />
       </form>
     </section>
