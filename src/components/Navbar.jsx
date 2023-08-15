@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { login, logout, onUserStateChange } from '../api/firebase';
 import User from './User';
 import Button from './ui/Button';
 import { useAuthContext } from './context/AuthContext';
