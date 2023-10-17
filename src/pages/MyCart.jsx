@@ -34,6 +34,7 @@ export default function MyCart() {
                 <CartItem
                   key={product.id}
                   product={product}
+                  uid={uid}
                 />
               ))}
           </ul>
