@@ -6,6 +6,7 @@ import CartItem from '../components/CartItem';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { FaEquals } from 'react-icons/fa';
 import PriceCard from '../components/PriceCard';
+import Button from '../components/ui/Button';
 
 const SHIPPING = 19.99;
 
@@ -23,12 +24,14 @@ export default function MyCart() {
       0
     );
   return (
-    <section>
-      <p>My Cart</p>
+    <section className='p-8 flex flex-col'>
+      <p className='text-2xl text-center font-bold pb-4 border-b border-gray-300'>
+        My Cart
+      </p>
       {!hasProducts && <p> Empty </p>}
       {hasProducts && (
         <>
-          <ul>
+          <ul className='border-b border-gray-300 mb-8 p-4 px-8'>
             {products &&
               products.map((product) => (
                 <CartItem
@@ -38,22 +41,26 @@ export default function MyCart() {
                 />
               ))}
           </ul>
-          <div>
+          <div className='flex justify-between items-center px-2 mb-8 md:px-8 lg:px-16'>
             <PriceCard
               text='SubTotal'
               price={totalPrice}
             />
-            <BsFillPlusCircleFill />
+            <BsFillPlusCircleFill className='shrink-0' />
             <PriceCard
               text='Shipping'
               price={SHIPPING}
             />
-            <FaEquals />
+            <FaEquals className='shrink-0' />
             <PriceCard
               text='Total'
               price={totalPrice + SHIPPING}
             />
           </div>
+          <Button
+            text='Order'
+            style='font-bold'
+          />
         </>
       )}
     </section>
